@@ -9,7 +9,7 @@ class WeatherModel {
   final String city;
   final String imgId;
   final int humidity;
-  final int cloudiness;
+  final double cloudiness;
   final double rain;
   final String windSpeedy;
   final int windDirection;
@@ -84,7 +84,7 @@ class Forecast {
   final int max;
   final int min;
   final int humidity;
-  final int cloudiness;
+  final double cloudiness;
   final double rain;
   final int rainProbability;
   final String windSpeedy;

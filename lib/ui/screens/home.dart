@@ -30,12 +30,12 @@ class Home extends StatelessWidget {
             SliverToBoxAdapter(
               child: Column(
                 children: <Widget>[
-                  CustomSearchField(controller: cityTextController),
+                  CustomSearchField(controller: cityTextController, onEditingComplete: () async{weatherStore.fetchWeatherByCity(cityTextController.text);},),
                   const SizedBox(height: 32,),
                 ],
               ),
             ),
-            Observer(builder: (context) => SliverList.builder(itemBuilder: (context, index) => Container(), itemCount: weatherStore.weatherList.length,),)
+            Observer(builder: (context) => SliverList.builder(itemBuilder: (context, index) => WeatherCard(onTap: (){}, weather: weatherStore.weatherList[index]), itemCount: weatherStore.weatherList.length,),)
           ],
         ),
       ),

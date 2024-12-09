@@ -7,7 +7,7 @@ class WeatherService {
   final String baseUrl = 'https://api.hgbrasil.com/weather';
 
   Future<Map<String, dynamic>> getWeather(String city) async {
-    final response = await http.get(Uri.parse('$baseUrl?key=$apiKey&city=$city'));
+    final response = await http.get(Uri.parse('$baseUrl?key=$apiKey&city_name=$city&unit=metric'));
 
     if (response.statusCode == 200) {
       return json.decode(response.body);

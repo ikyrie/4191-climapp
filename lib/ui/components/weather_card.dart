@@ -1,7 +1,9 @@
+import 'package:climapp/app/consts/images_url.dart';
 import 'package:climapp/app/models/weather_model.dart';
 import 'package:climapp/utils/colors.dart';
 import 'package:climapp/utils/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class WeatherCard extends StatelessWidget {
   const WeatherCard({super.key, required this.onTap, required this.weather});
@@ -27,7 +29,7 @@ class WeatherCard extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              const Icon(Icons.sunny),
+              SvgPicture.network('$weatherConditionUrl${weather.conditionSlug}.svg', width: 32,),
               Text(weather.city),
               Text("${weather.temp}˚", style: extraLargeBold,),
             ],
@@ -40,11 +42,12 @@ class WeatherCard extends StatelessWidget {
 
 
 class VerticalWeatherCard extends StatelessWidget {
-  const VerticalWeatherCard({super.key, required this.weekDay, required this.temperature, required this.date});
+  const VerticalWeatherCard({super.key, required this.weekDay, required this.temperature, required this.date, required this.moonPhase});
 
   final String weekDay;
   final String date;
   final String temperature;
+  final String moonPhase;
 
   @override
   Widget build(BuildContext context) {
@@ -65,9 +68,9 @@ class VerticalWeatherCard extends StatelessWidget {
             Text(weekDay),
             const SizedBox(height: 4,),
             Text(date),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: 16),
-              child: Icon(Icons.sunny),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              child: Image.network('$moonPhaseUrl${moonPhase}.png'),
             ),
             Text(temperature, style: largeSemibold,),
           ],
@@ -94,7 +97,7 @@ class DetailedWeatherCard extends StatelessWidget {
         children: <Widget>[
           Text("Hoje (${weather.date})", style: mediumSemibold,),
           const SizedBox(height: 24,),
-          const Icon(Icons.sunny, size: 64,),
+          SvgPicture.network('$weatherConditionUrl${weather.conditionSlug}.svg'),
           Text("${weather.temp}°", style: extraLargeBold.copyWith(fontSize: 42),),
           Text(weather.description),
           const SizedBox(height: 24,),

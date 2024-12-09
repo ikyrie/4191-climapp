@@ -35,7 +35,7 @@ class Home extends StatelessWidget {
                 ],
               ),
             ),
-            Observer(builder: (context) => SliverList.builder(itemBuilder: (context, index) => WeatherCard(onTap: (){}, weather: weatherStore.weatherList[index]), itemCount: weatherStore.weatherList.length,),)
+            Observer(builder: (context) => SliverList.builder(itemBuilder: (context, index) => WeatherCard(onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context) => WeatherDetails(weather: weatherStore.weatherList[index])));}, weather: weatherStore.weatherList[index]), itemCount: weatherStore.weatherList.length,),)
           ],
         ),
       ),

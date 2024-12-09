@@ -51,6 +51,7 @@ class VerticalWeatherCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Container(
+        width: 100,
         padding: const EdgeInsets.all(16),
         decoration: const BoxDecoration(
           color: fillTransparente,
@@ -77,7 +78,9 @@ class VerticalWeatherCard extends StatelessWidget {
 }
 
 class DetailedWeatherCard extends StatelessWidget {
-  const DetailedWeatherCard({super.key});
+  const DetailedWeatherCard({super.key, required this.weather});
+
+  final WeatherModel weather;
 
   @override
   Widget build(BuildContext context) {
@@ -89,11 +92,11 @@ class DetailedWeatherCard extends StatelessWidget {
       ),
       child: Column(
         children: <Widget>[
-          const Text("Hoje (03/12)", style: mediumSemibold,),
+          Text("Hoje (${weather.date})", style: mediumSemibold,),
           const SizedBox(height: 24,),
           const Icon(Icons.sunny, size: 64,),
-          Text("32°", style: extraLargeBold.copyWith(fontSize: 42),),
-          const Text("Sol entre nuvens"),
+          Text("${weather.temp}°", style: extraLargeBold.copyWith(fontSize: 42),),
+          Text(weather.description),
           const SizedBox(height: 24,),
           Row(
             children: <Widget>[
@@ -108,9 +111,9 @@ class DetailedWeatherCard extends StatelessWidget {
                 ),
               ),
               const Text("Umidade:", style: mediumSemibold,),
-              const Expanded(
+              Expanded(
                 child: Text(
-                  "80%",
+                  "${weather.humidity}%",
                   textAlign: TextAlign.right,
                 ),
               ),
@@ -130,8 +133,8 @@ class DetailedWeatherCard extends StatelessWidget {
                 ),
               ),
               const Text("Min/Max:", style: mediumSemibold,),
-              const Expanded(
-                child: Text("20/34°", textAlign: TextAlign.right),
+              Expanded(
+                child: Text("${weather.forecast[0].min}/${weather.forecast[0].max}°", textAlign: TextAlign.right),
               ),
             ],
           ),

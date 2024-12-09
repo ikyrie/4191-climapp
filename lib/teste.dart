@@ -1,10 +1,11 @@
-import 'package:climapp/app/adpaters/http_adapter.dart';
+import 'package:climapp/app/injection/injection_container.dart';
 import 'package:climapp/app/services/weather_service.dart';
-import 'package:http/http.dart' as http;
+import 'package:get_it/get_it.dart';
 
 void main() async {
-  final IHttpAdapter client = HttpClient(http.Client());
-  final WeatherService service = WeatherService(client);
+  setup();
+  GetIt getIt = GetIt.instance;
+  final WeatherService service = getIt.get<WeatherService>();
   final result = await service.getWeather("Toledo");
   print(result.cityName);
 }
